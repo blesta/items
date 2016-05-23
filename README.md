@@ -28,7 +28,7 @@ $fields = [
     'value' => 'Item'
 ];
 $item->setFields($fields);
-$item->addField('custom', 'ABC123');
+$item->setField('custom', 'ABC123');
 $item->removeField('value');
 print_r($item->getFields());
 ```
@@ -42,9 +42,9 @@ stdClass Object (
 )
 ```
 
-### ItemMap
+### Map
 
-ItemMap combines the values from one item with the keys of another item.
+Map combines the values from one item with the keys of another item.
 The result is a new item consisting of only the mapped keys and matching values.
 
 ```php
@@ -67,7 +67,7 @@ $mapFields = [
 $mapItem = new Item();
 $mapItem->setFields($mapFields);
 
-$map = new ItemMap();
+$map = new Map();
 $newItem = $map->combine($item, $mapItem);
 print_r($newItem->getFields());
 ```
