@@ -1,6 +1,6 @@
 # blesta/items
 
-A library for creating a collection of arbitrary items.
+A library for creating a collection of items that store arbitrary data.
 
 ## Installation
 
@@ -14,7 +14,7 @@ composer require blesta/items:~1.0
 
 ### Item
 
-Item stores generic data, such as user-defined fields.
+Item stores generic data, typically user-defined arrays or object data.
 
 ```php
 $item = new Item();
@@ -44,8 +44,9 @@ stdClass Object (
 
 ### Map
 
-Map combines the values from one item with the keys of another item.
-The result is a new item consisting of only the mapped keys and matching values.
+Map combines the values from one Item with the keys of another Item.
+The result is a new Item consisting of only the mapped keys that have item
+values.
 
 ```php
 // Create the item
