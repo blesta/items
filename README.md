@@ -42,9 +42,9 @@ stdClass Object (
 )
 ```
 
-### Map
+### ItemMap
 
-Map combines the values from one Item with the keys of another Item.
+ItemMap combines the values from one Item with the keys of another Item.
 The result is a new Item consisting of only the mapped keys that have item
 values.
 
@@ -68,7 +68,7 @@ $mapFields = [
 $mapItem = new Item();
 $mapItem->setFields($mapFields);
 
-$map = new Map();
+$map = new ItemMap();
 $newItem = $map->combine($item, $mapItem);
 print_r($newItem->getFields());
 ```
