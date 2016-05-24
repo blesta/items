@@ -43,7 +43,9 @@ class Item implements ItemInterface
      */
     public function setField($key, $value)
     {
-        $this->fields->{$key} = $value;
+        if (strlen($key) > 0) {
+            $this->fields->{$key} = $value;
+        }
     }
 
     /**
@@ -51,6 +53,9 @@ class Item implements ItemInterface
      */
     public function removeField($key)
     {
-        unset($this->fields->{$key});
+        // Ensure even numeric keys are removed
+        $fields = (array)$this->fields;
+        unset($fields[$key]);
+        $this->fields = (object)$fields;
     }
 }

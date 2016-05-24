@@ -5,9 +5,9 @@ use Blesta\Items\Item\Item;
 use stdClass;
 
 /**
- * Item
+ * ItemMap combines items
  */
-class Map extends Item
+class ItemMap
 {
     /**
      * @var The new item
@@ -40,10 +40,12 @@ class Map extends Item
 
         $this->fields = $item1->getFields();
 
-        foreach ((array)$item2->getFields() as $key => $value) {
+        foreach ($item2->getFields() as $key => $value) {
+            // Add a single value
             if (is_scalar($value)) {
                 $this->add($value, $key);
             } elseif (is_array($value)) {
+                // Add the first matching value found
                 $this->addFirstMatching($value, $key);
             }
         }

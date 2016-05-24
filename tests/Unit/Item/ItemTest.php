@@ -21,7 +21,7 @@ class ItemTest extends PHPUnit_Framework_TestCase
     /**
      * @covers ::getFields
      * @covers ::setFields
-     * @uses ::__construct
+     * @uses Blesta\Items\Item\Item::__construct
      * @dataProvider getFieldsProvider
      */
     public function testGetFields($fields, $expected)
@@ -48,38 +48,135 @@ class ItemTest extends PHPUnit_Framework_TestCase
                 (object)[]
             ],
             [
-                [['key' => 'value']],
-                (object)[['key' => 'value']]
+                [['key' => 'value', 'key2' => 'value2']],
+                (object)[['key' => 'value', 'key2' => 'value2']]
+            ],
+            [
+                (object)['key' => 'value'],
+                (object)['key' => 'value']
+            ],
+            // Setting invalid fields result in numerically properties
+            [
+                null,
+                (object)[]
+            ],
+            [
+                false,
+                (object)[0 => false]
+            ],
+            [
+                'string',
+                (object)[0 => 'string']
             ]
         ];
     }
 
     /**
-     * @covers ::setFields
-     * @uses ::__construct
+     * @covers ::setField
+     * @covers ::getFields
+     * @uses Blesta\Items\Item\Item::__construct
+     * @dataProvider setFieldProvider
      */
-    public function testSetFields()
+    public function testSetField($key, $value, $expected)
     {
+        $item = $this->item();
 
+        $item->setField($key, $value);
+
+        $this->assertEquals($expected, $item->getFields());
     }
 
     /**
-     * @covers ::setField
-     * @uses ::__construct
+     * Data Provider for setting a single field
+     *
+     * @return array
      */
-    public function testSetField()
+    public function setFieldProvider()
     {
-
+        return [
+            [
+                'key',
+                'value',
+                (object)['key' => 'value']
+            ],
+            [
+                0,
+                1,
+                (object)[0 => 1]
+            ],
+            [
+                true,
+                false,
+                (object)[1 => false]
+            ],
+            [
+                'field',
+                [0, 'abc', 2],
+                (object)['field' => [0, 'abc', 2]]
+            ],
+            [
+                'field',
+                (object)['array' => [], 'object' => (object)[]],
+                (object)['field' => (object)['array' => [], 'object' => (object)[]]]
+            ],
+            [
+                '',
+                1,
+                (object)[]
+            ],
+        ];
     }
 
     /**
      * @covers ::removeField
      * @covers ::getFields
-     * @uses ::__construct
+     * @uses Blesta\Items\Item\Item::__construct
+     * @uses Blesta\Items\Item\Item::setFields
+     * @dataProvider removeFieldProvider
      */
-    public function testRemoveField()
+    public function testRemoveField($fields, $removeKey, $expected)
     {
+        $item = $this->item();
 
+        $item->setFields($fields);
+        $item->removeField($removeKey);
+        $this->assertEquals($expected, $item->getFields());
+    }
+
+    /**
+     * Data Provider for removing a single field
+     *
+     * @return array
+     */
+    public function removeFieldProvider()
+    {
+        return [
+            [
+                ['key' => 'value'],
+                'key',
+                (object)[]
+            ],
+            [
+                ['key' => 'value'],
+                'value',
+                (object)['key' => 'value']
+            ],
+            [
+                ['key' => 'value', 'key2' => 'value2'],
+                'key2',
+                (object)['key' => 'value']
+            ],
+            [
+                ['key' => 'value'],
+                '',
+                (object)['key' => 'value']
+            ],
+            [
+                ['apple', 'banana', 'orange'],
+                1,
+                (object)[0 => 'apple', 2 => 'orange']
+            ]
+        ];
     }
 
     /**

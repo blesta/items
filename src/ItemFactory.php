@@ -2,7 +2,7 @@
 namespace Blesta\Items;
 
 use Blesta\Items\Item\Item;
-use Blesta\Items\Item\Map;
+use Blesta\Items\Item\ItemMap;
 use Blesta\Items\Collection\ItemCollection;
 
 /**
@@ -21,13 +21,13 @@ class ItemFactory
     }
 
     /**
-     * Retrieves a new instance of Map
+     * Retrieves a new instance of ItemMap
      *
-     * @return Map An instance of Map
+     * @return ItemMap An instance of ItemMap
      */
-    public function map()
+    public function itemMap()
     {
-        return new Map();
+        return new ItemMap();
     }
 
     /**

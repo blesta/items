@@ -1,6 +1,7 @@
 <?php
 namespace Blesta\Items\Collection;
 
+use Blesta\Items\Item\Item;
 use Iterator;
 
 /**
@@ -109,11 +110,9 @@ class ItemCollection implements Iterator
 
         // Set the position to the first entry in the collection if there is one
         $first_index = key($this->collection);
-        $this->position = (
-            $first_index === null
+        $this->position = $first_index === null
             ? 0
-            : $first_index
-        );
+            : $first_index;
     }
 
     /**

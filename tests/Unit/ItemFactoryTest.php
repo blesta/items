@@ -11,6 +11,7 @@ class ItemFactoryTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @covers ::item
+     * @uses Blesta\Items\Item\Item::__construct
      */
     public function testItem()
     {
@@ -21,13 +22,16 @@ class ItemFactoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::map
+     * @covers ::itemMap
+     * @uses Blesta\Items\Item\Item::__construct
+     * @uses Blesta\Items\Item\ItemMap::__construct
+     * @uses Blesta\Items\Item\ItemMap::reset
      */
-    public function testMap()
+    public function testItemMap()
     {
         $this->assertInstanceOf(
-            '\Blesta\Items\Item\Map',
-            $this->factory()->map()
+            '\Blesta\Items\Item\ItemMap',
+            $this->factory()->itemMap()
         );
     }
 
