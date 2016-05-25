@@ -1,7 +1,7 @@
 <?php
 namespace Blesta\Items\Collection;
 
-use Blesta\Items\Item\Item;
+use Blesta\Items\Item\ItemInterface;
 use Iterator;
 
 /**
@@ -21,10 +21,10 @@ class ItemCollection implements Iterator
     /**
      * Adds an Item to the collection
      *
-     * @param Item $item An item to add to the collection
+     * @param ItemInterface $item An item to add to the collection
      * @return reference to this
      */
-    public function append(Item $item)
+    public function append(ItemInterface $item)
     {
         $this->collection[] = $item;
         return $this;
@@ -33,10 +33,10 @@ class ItemCollection implements Iterator
     /**
      * Removes an Item from the collection
      *
-     * @param Item $item An item to remove from the collection
+     * @param ItemInterface $item An item to remove from the collection
      * @return reference to this
      */
-    public function remove(Item $item)
+    public function remove(ItemInterface $item)
     {
         // Remove all instances of the item from the collection
         foreach ($this->collection as $index => $it) {
