@@ -1,7 +1,8 @@
 <?php
 namespace Blesta\Items\Item;
 
-use Blesta\Items\Item\Item;
+use Blesta\Items\ItemFactory;
+use Blesta\Items\Item\ItemInterface;
 use stdClass;
 
 /**
@@ -17,23 +18,28 @@ class ItemMap
      * @var A set of item fields
      */
     private $fields;
+    /**
+     * @var ItemFactory
+     */
+    private $itemFactory;
 
     /**
      * Init
      */
-    public function __construct()
+    public function __construct(ItemFactory $factory = null)
     {
+        $this->itemFactory = ($factory ? $factory : new ItemFactory());
         $this->reset();
     }
 
     /**
      * Combine the values of one item with the keys of another item
      *
-     * @param Item $item1 The item whose values to combine
-     * @param Item $item2 The item whose keys to combine
+     * @param ItemInterface $item1 The item whose values to combine
+     * @param ItemInterface $item2 The item whose keys to combine
      * @return Item An item containing only keys from $item2 that match values in $item1
      */
-    public function combine(Item $item1, Item $item2)
+    public function combine(ItemInterface $item1, ItemInterface $item2)
     {
         // Reset the map
         $this->reset();
@@ -91,7 +97,7 @@ class ItemMap
      */
     protected function reset()
     {
-        $this->item = new Item();
+        $this->item = $this->itemFactory->item();
         $this->fields = new stdClass();
     }
 }
