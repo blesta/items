@@ -14,6 +14,7 @@ class ItemMapTest extends PHPUnit_Framework_TestCase
      * @covers ::__construct
      * @covers ::reset
      * @uses Blesta\Items\Item\Item::__construct
+     * @uses Blesta\Items\ItemFactory::item
      */
     public function testConstruct()
     {
@@ -30,6 +31,7 @@ class ItemMapTest extends PHPUnit_Framework_TestCase
      * @uses Blesta\Items\Item\Item::setFields
      * @uses Blesta\Items\Item\Item::setField
      * @uses Blesta\Items\Item\Item::getFields
+     * @uses Blesta\Items\ItemFactory::item
      * @dataProvider combineProvider
      */
     public function testCombine($item1Fields, $item2Fields, $expectedItem)
@@ -71,6 +73,10 @@ class ItemMapTest extends PHPUnit_Framework_TestCase
         $item2 = $this->item();
         $item2->setFields($fields2);
 
+        $fields3 = ['USD', 'tasty'];
+        $item3 = $this->item();
+        $item3->setFields($fields3);
+
         return [
             [
                 ['apple' => true, 'banana' => false, 'broccoli' => 'gross', 'type' => ['accept', 'deny']],
@@ -86,6 +92,11 @@ class ItemMapTest extends PHPUnit_Framework_TestCase
                 ['iso4217' => 'USD', 'key' => 'value'],
                 ['price' => ['override_price', 'price'], 'currency' => ['currency', 'iso4217']],
                 $item2
+            ],
+            [
+                ['currency' => 'USD', 'apple' => 'tasty', 'banana' => 'good'],
+                ['currency', ['apple', 'banana']],
+                $item3
             ],
             [
                 ['apple' => true, 'banana' => false, 'broccoli' => 'gross', 'type' => ['accept', 'deny']],

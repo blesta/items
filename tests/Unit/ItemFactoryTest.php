@@ -26,6 +26,7 @@ class ItemFactoryTest extends PHPUnit_Framework_TestCase
      * @uses Blesta\Items\Item\Item::__construct
      * @uses Blesta\Items\Item\ItemMap::__construct
      * @uses Blesta\Items\Item\ItemMap::reset
+     * @uses Blesta\Items\ItemFactory::item
      */
     public function testItemMap()
     {
