@@ -10,7 +10,7 @@ use Iterator;
 class ItemCollection implements Iterator
 {
     /**
-     * @var A collection of Item objects
+     * @var array A collection of Item objects
      */
     private $collection = array();
     /**
@@ -22,8 +22,9 @@ class ItemCollection implements Iterator
      * Adds an Item to the collection
      *
      * @param ItemInterface $item An item to add to the collection
-     * @return reference to this
+     * @return ItemCollection reference to this
      */
+    #[\ReturnTypeWillChange]
     public function append(ItemInterface $item)
     {
         $this->collection[] = $item;
@@ -34,8 +35,9 @@ class ItemCollection implements Iterator
      * Removes an Item from the collection
      *
      * @param ItemInterface $item An item to remove from the collection
-     * @return reference to this
+     * @return ItemCollection reference to this
      */
+    #[\ReturnTypeWillChange]
     public function remove(ItemInterface $item)
     {
         // Remove all instances of the item from the collection
@@ -52,6 +54,7 @@ class ItemCollection implements Iterator
      *
      * @return int The number of Item objects in the collection
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->collection);
@@ -62,6 +65,7 @@ class ItemCollection implements Iterator
      *
      * @return mixed The Item in the collection at the current position, otherwise null
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return (
@@ -76,6 +80,7 @@ class ItemCollection implements Iterator
      *
      * @return int The index of the position in the collection
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->position;
@@ -84,6 +89,7 @@ class ItemCollection implements Iterator
     /**
      * Moves the pointer to the next item in the collection
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         // Set the next position to the position of the next item in the collection
@@ -103,6 +109,7 @@ class ItemCollection implements Iterator
     /**
      * Moves the pointer to the first item in the collection
      */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         // Reset the array pointer to the first entry in the collection
@@ -120,6 +127,7 @@ class ItemCollection implements Iterator
      *
      * @return boolean True if the pointer references a valid item in the collection, false otherwise
      */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return array_key_exists($this->position, $this->collection);
