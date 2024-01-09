@@ -25,5 +25,9 @@
         "psr-4": {
             "Blesta\\Items\\Tests\\": "tests/"
         }
+    },
+    "conflict": {
+        "phpunit/phpunit": "<4.8.28",
+        "squizlabs/php_codesniffer": "<2.8.1"
     }
 }
