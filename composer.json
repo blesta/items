@@ -25,5 +25,8 @@
         "psr-4": {
             "Blesta\\Items\\Tests\\": "tests/"
         }
+    },
+    "conflict": {
+        "phpunit/phpunit": "<4.8.28"
     }
 }
